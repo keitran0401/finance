@@ -1,0 +1,28 @@
+PostgreSQL:
+postgres://qvuhkkajgsjnfg:ec0ebb04fdbedfa41f9ebd39266763b1a30b646c21dccd2d2b9dc90722f0a35f@ec2-34-195-169-25.compute-1.amazonaws.com:5432/dc9fpkc6a4bemg
+
+API_KEY:
+pk_7aa05b2d4dcd44e0ae7bff6be59861f2
+
+
+1. application.py
+
+Notice how it configures Jinja with a custom “filter,” usd, 
+a function (defined in helpers.py) that will make it easier to 
+format values as US dollars (USD). 
+
+It then further configures Flask to store sessions on the 
+local filesystem (i.e., disk) as opposed to storing them inside of 
+(digitally signed) cookies, which is Flask’s default.
+
+
+2. helpers.py
+Given a symbol (e.g., NFLX, AAPL)
+
+lookup function: returns a stock quote for a company in the form of 
+a dict with three keys: 
+- name (str)
+- price (float)
+- symbol (str) 
+- a canonicalized (uppercase) version of a stock’s symbol, 
+irrespective of how that symbol was capitalized when passed into lookup

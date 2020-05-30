@@ -132,6 +132,9 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    # Clear session
+    session.clear()
+
     if request.method == "POST":
         # Check input
         username = request.form.get("username")

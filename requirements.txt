@@ -1,10 +1,7 @@
 flask
-flask-Session
+flask_session
 flask_sqlalchemy
 sqlalchemy
-sqlalchemy.orm
 tempfile
-werkzeug.exceptions
-werkzeug.security
-requests
+werkzeug
 gunicorn

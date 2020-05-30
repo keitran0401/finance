@@ -2,6 +2,5 @@ flask
 flask_session
 flask_sqlalchemy
 sqlalchemy
-tempfile
 werkzeug
 gunicorn

@@ -1,6 +1,8 @@
 flask
 flask_session
+flask_sqlalchemy
 sqlalchemy
 requests
 psycopg2
+itsdangerous<1.0.0 
 gunicorn

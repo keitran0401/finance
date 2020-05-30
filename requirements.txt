@@ -1,7 +1,5 @@
 flask
 flask_session
-flask_sqlalchemy
 sqlalchemy
-werkzeug
 requests
 gunicorn

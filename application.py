@@ -46,7 +46,7 @@ if not os.environ.get("API_KEY"):
     raise RuntimeError("API_KEY not set")
 
 
-@ app.route("/")
+@app.route("/")
 @login_required
 def index():
     # Query database for cash
@@ -89,7 +89,7 @@ def index():
                            names=names, price=price, total=total, cash=usd(cash), grand=usd(grand))
 
 
-@ app.route("/register", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         # Check input
@@ -129,6 +129,8 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    session.clear()
+
     if request.method == "POST":
         # Check input
         username = request.form.get("username")
@@ -155,19 +157,19 @@ def login():
         return render_template("login.html")
 
 
-@ app.route("/logout")
+@app.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
 
 
-@ app.route("/password")
-@ login_required
+@app.route("/password")
+@login_required
 def password():
     return render_template("password.html")
 
 
-@ app.route("/reset", methods=["POST"])
+@app.route("/reset", methods=["POST"])
 def reset():
     # Check input
     present_password = request.form.get("present_password")
@@ -200,8 +202,8 @@ def reset():
     return redirect("/")
 
 
-@ app.route("/quote", methods=["GET", "POST"])
-@ login_required
+@app.route("/quote", methods=["GET", "POST"])
+@login_required
 def quote():
     if request.method == "POST":
         # Check input
@@ -222,8 +224,8 @@ def quote():
         return render_template("quote.html")
 
 
-@ app.route("/buy", methods=["GET", "POST"])
-@ login_required
+@app.route("/buy", methods=["GET", "POST"])
+@login_required
 def buy():
     if request.method == "POST":
         # Check input
@@ -269,8 +271,8 @@ def buy():
         return render_template("buy.html")
 
 
-@ app.route("/sell", methods=["GET", "POST"])
-@ login_required
+@app.route("/sell", methods=["GET", "POST"])
+@login_required
 def sell():
     # Query "stocks" table
     rows = db.execute("SELECT symbol, SUM(shares) FROM stocks WHERE user_id=:user_id GROUP BY symbol HAVING SUM(shares) > 0",
@@ -317,8 +319,8 @@ def sell():
         return render_template("sell.html", rows=rows)
 
 
-@ app.route("/history")
-@ login_required
+@app.route("/history")
+@login_required
 def history():
     # Query "stocks" table
     rows = db.execute("SELECT symbol, shares, price, date FROM stocks WHERE user_id=:user_id",

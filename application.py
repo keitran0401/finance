@@ -203,7 +203,6 @@ def reset():
 
 
 @app.route("/quote", methods=["GET", "POST"])
-@login_required
 def quote():
     if request.method == "POST":
         # Check input
@@ -225,7 +224,6 @@ def quote():
 
 
 @app.route("/buy", methods=["GET", "POST"])
-@login_required
 def buy():
     if request.method == "POST":
         # Check input
@@ -272,7 +270,6 @@ def buy():
 
 
 @app.route("/sell", methods=["GET", "POST"])
-@login_required
 def sell():
     # Query "stocks" table
     rows = db.execute("SELECT symbol, SUM(shares) FROM stocks WHERE user_id=:user_id GROUP BY symbol HAVING SUM(shares) > 0",
@@ -320,7 +317,6 @@ def sell():
 
 
 @app.route("/history")
-@login_required
 def history():
     # Query "stocks" table
     rows = db.execute("SELECT symbol, shares, price, date FROM stocks WHERE user_id=:user_id",
